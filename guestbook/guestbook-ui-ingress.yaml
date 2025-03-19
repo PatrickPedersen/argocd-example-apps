@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: guestbook-ui
+  namespace: guestbook-ui
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: guestbook.gruppe1.lan
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: guestbook.gruppe1.lan
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: guestbook-ui
+            port: 
+              number: 80

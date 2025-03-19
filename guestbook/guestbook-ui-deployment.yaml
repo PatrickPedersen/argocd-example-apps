@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: guestbook-ui
+  namespace: guestbook
 spec:
-  replicas: 1
+  replicas: 10
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -16,5 +17,12 @@ spec:
       containers:
       - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
         name: guestbook-ui
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
         ports:
         - containerPort: 80
